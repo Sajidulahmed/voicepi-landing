@@ -61,3 +61,22 @@ It blends **emotion, spirituality, and technology**, reflecting the essence of P
 ---
 
 © 2025 **VoicePi** — *Built with Faith, Emotion & Technology for Pi Hackathon.*
+
+
+
+
+---
+
+## 🌍 Support & Vision  
+
+**VoicePi** aims to unite Pioneers through inspiring voices, ethical technology, and a sense of spiritual purpose.  
+It envisions a **peaceful digital world** where every good voice earns Pi — spreading motivation, hope, and barakah across the network.  
+
+> 💫 “Voices of faith, love, and truth can change the digital world — one Pi at a time.”  
+
+🌐 Join the movement — record, share, and inspire with **VoicePi**.  
+Built with **Faith, Emotion & Technology** for a better Pi future.  
+
+---
+
+🕊️ *Dedicated to all Pioneers striving for a Halal, Transparent, and Rewarding Web3 Ecosystem.*
