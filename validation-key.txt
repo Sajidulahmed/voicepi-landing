@@ -1,10 +1,1 @@
-# VoicePi Domain Verification
-This file verifies the ownership of the VoicePi app domain for Pi Developer Portal.
-
-Validation Key: 7362301e525c9bc4bd2f1c5eb08072
-App Name: VoicePi
-Developer: Sajidul Ahmed
-Platform: GitHub Pages (Testnet)
-Project: VoicePi – Audio Impact Network (Pi Hackathon 2025)
-
-© 2025 VoicePi. Built with Faith, Emotion & Technology.
+7362301e525c9bc4bd2f1c5eb08072
