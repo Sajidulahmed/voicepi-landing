@@ -80,3 +80,5 @@ Built with **Faith, Emotion & Technology** for a better Pi future.
 ---
 
 🕊️ *Dedicated to all Pioneers striving for a Halal, Transparent, and Rewarding Web3 Ecosystem.*
+# VoicePi Landing Page 
+(updated)
