@@ -156,10 +156,102 @@
       .right{order:-1}
       h1{font-size:28px}
     }
+    /* --- Noor Path subtle glow animation --- */
+.noor-wrap {
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:18px;
+}
+
+.noor-img {
+  width:320px;
+  max-width:40vw;
+  filter: drop-shadow(0 0 18px rgba(255,200,80,0.12));
+  transition: transform .4s ease;
+  will-change: filter, transform;
+  border-radius:6px;
+}
+
+.noor-glow {
+  position:relative;
+}
+.noor-glow::after{
+  content:"";
+  position:absolute;
+  inset:-14%;
+  background: radial-gradient(ellipse at center, rgba(255,220,120,0.18) 0%, rgba(255,200,80,0.06) 40%, rgba(118,34,174,0.0) 60%);
+  border-radius:20px;
+  opacity:0;
+  pointer-events:none;
+  z-index:-1;
+  animation:noorPulse 10s ease-in-out infinite;
+}
+
+@keyframes noorPulse {
+  0%   { opacity:0; transform:scale(0.98); filter:blur(8px);}
+  30%  { opacity:0.28; transform:scale(1.03); filter:blur(6px);}
+  50%  { opacity:0.45; transform:scale(1.06); filter:blur(4px);}
+  70%  { opacity:0.28; transform:scale(1.03); filter:blur(6px);}
+  100% { opacity:0; transform:scale(0.98); filter:blur(8px);}
+}
+
+.noor-img.pulse {
+  animation: logoPulse 10s ease-in-out infinite;
+}
+@keyframes logoPulse {
+  0% { transform:scale(1.00); filter:brightness(1);}
+  50% { transform:scale(1.02); filter:brightness(1.08) drop-shadow(0 0 12px rgba(255,210,120,0.12)); }
+  100% { transform:scale(1.00); filter:brightness(1);}
+    /* --- Noor Path subtle glow animation --- */
+.noor-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+}
+
+.noor-img {
+  width: 320px;
+  max-width: 40vw;
+  filter: drop-shadow(0 0 18px rgba(255, 200, 120, 0.4));
+  transition: transform 0.4s ease;
+  border-radius: 6px;
+  transform-origin: center;
+}
+
+/* one-time intro glow (first 5s) */
+.noor-img.intro {
+  animation: introGlow 5s ease forwards;
+}
+
+/* continuous subtle pulsing glow */
+.noor-img.pulse {
+  animation: pulseGlow 6s ease-in-out infinite;
+}
+
+@keyframes introGlow {
+  0%   { transform: scale(1); filter: brightness(1); opacity: 0.9; }
+  30%  { transform: scale(1.06); filter: brightness(1.25) drop-shadow(0 0 25px rgba(255,210,120,0.3)); }
+  60%  { transform: scale(1.04); filter: brightness(1.12) drop-shadow(0 0 16px rgba(255,200,90,0.2)); }
+  100% { transform: scale(1); filter: brightness(1.05); opacity: 1; }
+}
+
+@keyframes pulseGlow {
+  0% { transform: scale(1); filter: brightness(1); }
+  50% { transform: scale(1.02); filter: brightness(1.1) drop-shadow(0 0 12px rgba(255,210,120,0.15)); }
+  100% { transform: scale(1); filter: brightness(1); }
+      }                                          }
   </style>
 </head>
 <body>
   <div class="wrap" role="main">
+    <!-- Noor Path glowing banner -->
+<div class="noor-wrap" style="margin-bottom:16px;">
+  <div class="noor-glow">
+    <img src="./20251013_081324.png" alt="The Noor Path" class="noor-img pulse" />
+  </div>
+</div>
     <div class="hero">
       <div class="left">
         <div class="logo" aria-hidden="true">
@@ -224,6 +316,18 @@
 
     const modal = document.getElementById('modal');
     const yt = document.getElementById('ytFrame');
+    // Noor intro → then continuous pulse
+  (function(){
+    const img = document.querySelector('.noor-img');
+    if(!img) return;
+    // Start with intro glow
+    img.classList.add('intro');
+    // After 5 seconds, switch to subtle pulse
+    setTimeout(()=> {
+      img.classList.remove('intro');
+      img.classList.add('pulse');
+    }, 5000);
+  })();
     const openBtns = [document.getElementById('openVideo'), document.getElementById('openVideo2')];
     const closeBtn = document.getElementById('closeModal');
 
@@ -243,7 +347,9 @@
     // close on background click
     modal.addEventListener('click', (e) => { if(e.target === modal) closeModal(); });
     // ESC to close
+    
     document.addEventListener('keydown', (e) => { if(e.key === 'Escape') closeModal(); });
   </script>
 </body>
   </html>
+
