@@ -241,7 +241,68 @@
   0% { transform: scale(1); filter: brightness(1); }
   50% { transform: scale(1.02); filter: brightness(1.1) drop-shadow(0 0 12px rgba(255,210,120,0.15)); }
   100% { transform: scale(1); filter: brightness(1); }
-      }                                          }
+      }     
+    }...
+<footer>
+  © 2025 PiVoice. Built for Pi Hackathon.
+</footer>
+
+<!-- 👇 JavaScript block डालो यहां -->
+<script>
+/* ---------- Dual demo: short (30s) + full (3min) modal player ---------- */
+
+(function(){
+  // YouTube IDs (only the ID part)
+  const SHORT_YT_ID = "IqjPGNbvmKNWYYFi"; // 30s demo
+  const FULL_YT_ID  = "IYLyJPFY1Ao";      // 3-min demo
+
+  // modal + iframe elements
+  const modal = document.getElementById('modal');
+  const yt = document.getElementById('ytFrame');
+  const openShortBtn = document.getElementById('openVideo');
+  const openFullBtn  = document.getElementById('openVideo2');
+  const closeBtn     = document.getElementById('closeModal');
+
+  function openModalWithId(vidId) {
+    if(!yt || !modal) return;
+    yt.src = "https://www.youtube.com/embed/" + vidId + "?autoplay=1&rel=0&modestbranding=1";
+    modal.style.display = 'flex';
+    modal.classList.add('open');
+    modal.setAttribute('aria-hidden','false');
+  }
+
+  function closeModal() {
+    if(!yt || !modal) return;
+    yt.src = "";
+    modal.classList.remove('open');
+    modal.style.display = 'none';
+    modal.setAttribute('aria-hidden','true');
+  }
+
+  if (openShortBtn) openShortBtn.addEventListener('click', () => openModalWithId(SHORT_YT_ID));
+  if (openFullBtn)  openFullBtn.addEventListener('click', () => openModalWithId(FULL_YT_ID));
+  if (closeBtn)     closeBtn.addEventListener('click', closeModal);
+
+  // close on background click
+  if (modal) modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+
+  // ESC to close
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+
+  /* ---------- Noor image intro → then continuous pulse ---------- */
+  const img = document.querySelector('.noor-img');
+  if(img){
+    img.classList.add('intro'); // initial glow class (CSS must define it)
+    setTimeout(()=> {
+      img.classList.remove('intro');
+      img.classList.add('pulse'); // subtle repeating pulse
+    }, 5000);
+  }
+})();
+</script>
+
+</body>
+</html>
   </style>
 </head>
 <body>
