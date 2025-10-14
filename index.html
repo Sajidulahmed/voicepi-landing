@@ -248,68 +248,75 @@
 </footer>
 
 <!-- 👇 JavaScript block डालो यहां -->
-<!-- JavaScript: Dual demo (short + full) + Noor intro -->
+<!-- ⚠️ Replace the existing script block with this one -->
 <script>
-    <button id="openVideo" class="btn btn--primary">▶ Watch Demo (30s)</button>
-    <button id="openVideo2" class="btn btn--primary">▶ Play Demo</button>
+/* ---------- Dual demo: short (30s) + full (3min) modal player + Noor pulse ---------- */
 (function(){
   // YouTube IDs (only ID part)
   const SHORT_YT_ID = "IqjPGNbvmKNWYYFi"; // 30s demo (short)
-  const FULL_YT_ID  = "IYLyJPFY1Ao";      // 3-min demo (full)
+  const FULL_YT_ID  = "IYLyJPFY1Ao";     // 3-min demo (full)
 
-  // modal + iframe elements
+  // modal + iframe elements (ensure these IDs match your HTML)
   const modal = document.getElementById('modal');
-  const yt    = document.getElementById('ytFrame'); // iframe
-  const openShortBtn = document.getElementById('openVideo');   // Watch Demo (30s)
-  const openFullBtn  = document.getElementById('openVideo2');  // Play Demo (full)
-  const closeBtn     = document.getElementById('closeModal');
+  const yt = document.getElementById('ytFrame'); // iframe id => ytFrame
+  const openShortBtn = document.getElementById('openVideo');   // Watch Demo (30s) button
+  const openFullBtn  = document.getElementById('openVideo2');  // Play Demo (3min) button
+  const closeBtn = document.getElementById('closeModal');
 
-  // helper to open modal with given video id
+  // Debug: show what's found (open console to inspect)
+  console.log("DEBUG elements:", { modal, yt, openShortBtn, openFullBtn, closeBtn });
+
   function openModalWithId(vidId){
-    if(!yt || !modal) return;
-    // ensure iframe src is set to embed + autoplay
-    yt.src = "https://www.youtube.com/embed/" + vidId + "?autoplay=1&rel=0&modestbranding=1";
-    modal.classList.add('open');
+    if(!yt || !modal){
+      console.warn("Modal or iframe missing", { yt, modal });
+      return;
+    }
+    // set iframe src to requested YouTube embed (autoplay on)
+    yt.src = "https://www.youtube.com/embed/" + vidId + "?autoplay=1&rel=0";
     modal.style.display = 'flex';
+    modal.classList.add('open');
     modal.setAttribute('aria-hidden','false');
+    console.log("DEBUG openModalWithId ->", vidId, yt.src);
   }
 
   function closeModal(){
-    if(!modal || !yt) return;
-    modal.classList.remove('open');
-    // stop playback by clearing src
+    if(!yt || !modal) return;
+    // stop playback by removing src
     yt.src = "";
+    modal.classList.remove('open');
     modal.style.display = 'none';
     modal.setAttribute('aria-hidden','true');
+    console.log("DEBUG closeModal");
   }
 
-  // attach listeners (check existence)
-  if(openShortBtn) openShortBtn.addEventListener('click', () => openModalWithId(SHORT_YT_ID));
-  if(openFullBtn)  openFullBtn.addEventListener('click', () => openModalWithId(FULL_YT_ID));
+  // Attach listeners safely
+  if(openShortBtn) openShortBtn.addEventListener('click', ()=> openModalWithId(SHORT_YT_ID));
+  if(openFullBtn)  openFullBtn.addEventListener('click',  ()=> openModalWithId(FULL_YT_ID));
   if(closeBtn)     closeBtn.addEventListener('click', closeModal);
 
-  // close by clicking outside modal inner
-  if(modal) modal.addEventListener('click', (e) => { if(e.target === modal) closeModal(); });
-
-  // ESC => close
+  // close when clicking outside modal-inner
+  if(modal){
+    modal.addEventListener('click', (e) => {
+      if(e.target === modal) closeModal();
+    });
+  }
+  // ESC to close
   document.addEventListener('keydown', (e) => { if(e.key === 'Escape') closeModal(); });
 
   /* --- Noor image intro -> then continuous pulse --- */
-  (function noorPulse(){
-    const img = document.querySelector('.noor-img');
-    if(!img) return;
-    // start with intro class (requires CSS .noor-img.intro)
+  const img = document.querySelector('.noor-img'); // ensure your <img> has class="noor-img"
+  if(img){
+    // one-time intro class
     img.classList.add('intro');
-    // after 5s switch to repeating pulse
-    setTimeout(()=> {
+    // after 5s switch to subtle pulse
+    setTimeout(()=>{
       img.classList.remove('intro');
-      img.classList.add('pulse'); // CSS .noor-img.pulse should exist
+      img.classList.add('pulse');
     }, 5000);
-  })();
+  }
 
-})();
+})(); // IIFE
 </script>
-
 </body>
 </html>
   </style>
