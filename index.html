@@ -244,78 +244,63 @@
       }     
     }...
 <footer>
-  © 2025 PiVoice. Built for Pi Hackathon.
-</footer>
-
-<!-- 👇 JavaScript block डालो यहां -->
-<!-- ⚠️ Replace the existing script block with this one -->
+  <!-- ✅ NEW: Dual Video + Noor Glow Script -->
 <script>
-/* ---------- Dual demo: short (30s) + full (3min) modal player + Noor pulse ---------- */
 (function(){
-  // YouTube IDs (only ID part)
-  const SHORT_YT_ID = "IqjPGNbvmKNWYYFi"; // 30s demo (short)
-  const FULL_YT_ID  = "IYLyJPFY1Ao";     // 3-min demo (full)
+  // 🎥 YouTube IDs (only the ID part)
+  const SHORT_YT_ID = "IqjPGNbvmKNWYYFi"; // 30s demo
+  const FULL_YT_ID  = "IYLyJPFY1Ao";      // 3min demo
 
-  // modal + iframe elements (ensure these IDs match your HTML)
+  // 🧱 Modal + iframe elements (must match HTML)
   const modal = document.getElementById('modal');
-  const yt = document.getElementById('ytFrame'); // iframe id => ytFrame
-  const openShortBtn = document.getElementById('openVideo');   // Watch Demo (30s) button
-  const openFullBtn  = document.getElementById('openVideo2');  // Play Demo (3min) button
-  const closeBtn = document.getElementById('closeModal');
+  const yt    = document.getElementById('ytFrame');
+  const openShortBtn = document.getElementById('openVideo');   // Watch Demo (30s)
+  const openFullBtn  = document.getElementById('openVideo2');  // Play Demo (3min)
+  const closeBtn     = document.getElementById('closeModal');
 
-  // Debug: show what's found (open console to inspect)
-  console.log("DEBUG elements:", { modal, yt, openShortBtn, openFullBtn, closeBtn });
-
+  // 🧩 Helper: open modal with video
   function openModalWithId(vidId){
-    if(!yt || !modal){
-      console.warn("Modal or iframe missing", { yt, modal });
-      return;
-    }
-    // set iframe src to requested YouTube embed (autoplay on)
-    yt.src = "https://www.youtube.com/embed/" + vidId + "?autoplay=1&rel=0";
+    if(!yt || !modal) return;
+    yt.src = "https://www.youtube.com/embed/" + vidId + "?autoplay=1&rel=0&modestbranding=1";
     modal.style.display = 'flex';
     modal.classList.add('open');
     modal.setAttribute('aria-hidden','false');
-    console.log("DEBUG openModalWithId ->", vidId, yt.src);
   }
 
+  // ❌ Close modal
   function closeModal(){
     if(!yt || !modal) return;
-    // stop playback by removing src
     yt.src = "";
     modal.classList.remove('open');
     modal.style.display = 'none';
     modal.setAttribute('aria-hidden','true');
-    console.log("DEBUG closeModal");
   }
 
-  // Attach listeners safely
-  if(openShortBtn) openShortBtn.addEventListener('click', ()=> openModalWithId(SHORT_YT_ID));
-  if(openFullBtn)  openFullBtn.addEventListener('click',  ()=> openModalWithId(FULL_YT_ID));
+  // 🧭 Button event listeners
+  if(openShortBtn) openShortBtn.addEventListener('click', () => openModalWithId(SHORT_YT_ID));
+  if(openFullBtn)  openFullBtn.addEventListener('click', () => openModalWithId(FULL_YT_ID));
   if(closeBtn)     closeBtn.addEventListener('click', closeModal);
 
-  // close when clicking outside modal-inner
+  // 💨 Click outside modal to close
   if(modal){
     modal.addEventListener('click', (e) => {
       if(e.target === modal) closeModal();
     });
   }
-  // ESC to close
+
+  // ⌨ ESC key to close
   document.addEventListener('keydown', (e) => { if(e.key === 'Escape') closeModal(); });
 
-  /* --- Noor image intro -> then continuous pulse --- */
-  const img = document.querySelector('.noor-img'); // ensure your <img> has class="noor-img"
+  // 🌙 Noor image glow intro + pulse
+  const img = document.querySelector('.noor-img');
   if(img){
-    // one-time intro class
     img.classList.add('intro');
-    // after 5s switch to subtle pulse
-    setTimeout(()=>{
+    setTimeout(()=> {
       img.classList.remove('intro');
       img.classList.add('pulse');
     }, 5000);
   }
-
-})(); // IIFE
+})();
 </script>
 </body>
 </html>
@@ -354,40 +339,11 @@
           <a class="btn" style="background:#fff;color:#021024" href="https://play.google.com/store" target="_blank" rel="noopener">
             🌐 Join Pi Network
           </a>
-        </div>
+          <!-- Watch short (30s) -->
+<button class="btn btn--primary" id="openVideo">▶ Watch Demo (30s)</button>
 
-        <div style="height:14px"></div>
-        <div class="small muted">Built for Pi Hackathon 2025 • Short demo available on YouTube</div>
-      </div>
-
-      <div class="right">
-        <div class="card">
-          <h3 style="margin:0 0 8px">PiVoice Demo</h3>
-          <p class="muted">Quick preview — click Watch Demo to play the YouTube video inside the page.</p>
-          <div style="height:12px"></div>
-          <div style="display:flex;gap:8px;justify-content:center">
-            <button class="btn btn--primary" id="openVideo2">▶ Play Demo</button>
-            <a class="btn btn--ghost" href="https://youtu.be/dKlww-WgriA?si=RkkqoIoIDe6Pd9cB" target="_blank" rel="noopener">Open YouTube</a>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <footer>
-      © 2025 PiVoice. Built for Pi Hackathon.
-    </footer>
-  </div>
-
-  <!-- Modal for YouTube -->
-  <div id="modal" class="modal" aria-hidden="true">
-    <button class="close-btn" id="closeModal" aria-label="Close">✕</button>
-    <div class="modal-inner">
-      <!-- Embedded video (use the watch?v= ID) -->
-      <iframe id="ytFrame" src="" title="PiVoice Demo" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-    </div>
-  </div>
-
-  
+<!-- Play full (3min) -->
+<button class="btn btn--primary" id="openVideo2">▶ Play Demo</button>
 </body>
   </html>
 
