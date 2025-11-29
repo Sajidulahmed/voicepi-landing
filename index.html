@@ -1,169 +1,313 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>VoicePi — Landing</title>
-<meta name="description" content="PiVoice — share 30-second motivational voice notes on Pi Network." />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>PiVoice — Landing</title>
+  <meta name="description" content="PiVoice — share 30-second motivational voice notes on Pi Network. Demo & Brainstorm links." />
 
-<style>
-:root{
-  --bg1:#4b2bd6;
-  --bg2:#3bb7ff;
-  --card:#ffffff;
-  --accent:#fc4c30;
-  --muted:#f6f6f9;
-  --text:#0b1220;
-}
+  <style>
+    :root{
+      --bg1:#4b2bd6;
+      --bg2:#3bb7ff;
+      --card:#ffffffee;
+      --accent:#f4c430;
+      --muted:#f6f6f9;
+      --text:#0b1220;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background: linear-gradient(180deg,var(--bg1),var(--bg2));
+      color:var(--text);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:32px;
+    }
 
-/* layout */
-*{box-sizing:border-box}
-body{
-  margin:0; font-family:Inter,Arial;
-  background:linear-gradient(180deg,var(--bg1),var(--bg2));
-  color:var(--text); min-height:100vh;
-  display:flex; align-items:center; justify-content:center;
-  padding:32px;
-}
+    .wrap{
+      width:100%;
+      max-width:920px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+      border-radius:18px;
+      box-shadow: 0 12px 40px rgba(11,18,32,0.35);
+      overflow:hidden;
+    }
+    .hero{
+      display:flex;
+      gap:28px;
+      align-items:center;
+      padding:48px;
+      flex-wrap:wrap;
+    }
 
-.wrap{width:100%; max-width:920px; background:#fff; border-radius:18px;padding:28px;}
+    .left{
+      flex:1 1 360px;
+      min-width:260px;
+      color:#fff;
+    }
+    .logo{
+      width:96px;
+      height:96px;
+      border-radius:20px;
+      overflow:hidden;
+      background:rgba(255,255,255,0.06);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      margin-bottom:18px;
+    }
+    .logo img{width:78%; height:78%; object-fit:contain; display:block}
 
-/* Header */
-.hero{text-align:center;}
-h1{font-size:34px;margin:0 0 6px; line-height:1.1;}
-p.lead{opacity:.95; font-size:16px}
+    h1{font-size:34px; margin:6px 0 12px; line-height:1.02}
+    p.lead{opacity:.95; margin:0 0 18px; font-size:16px}
 
-/* CTA buttons */
-.cta-row{
-  display:flex; gap:12px; justify-content:center; margin-top:18px;
-}
-.btn{
-  padding:12px 18px;border-radius:8px; cursor:pointer;
-  font-weight:600; border:0;
-}
-.btn--primary{background:#4b2bd6;color:#fff;}
-.btn--ghost{background:transparent;border:1px solid #4b2bd6;color:#4b2bd6;}
+    .cta-row{display:flex; gap:12px; flex-wrap:wrap}
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      padding:12px 18px;
+      border-radius:999px;
+      font-weight:600;
+      cursor:pointer;
+      text-decoration:none;
+      transition:transform .08s ease, box-shadow .12s ease;
+      box-shadow:0 6px 18px rgba(11,18,32,0.25);
+      border:none;
+      font-size:14px;
+    }
+    .btn:active{transform:translateY(1px)}
+    .btn--primary{background:var(--accent); color:#051017}
+    .btn--ghost{background:transparent; border:1px solid rgba(255,255,255,0.14); color:#fff}
 
-/* YouTube modal */
-.modal{
-  position:fixed; inset:0;display:none;
-  align-items:center; justify-content:center;
-  background:rgba(0,0,0,.7);
-}
-.modal.open{display:flex;}
-.modal iframe{
-  width:90%; max-width:680px; height:360px; background:#000;
-  border-radius:8px;
-}
-.close-btn{
-  position:absolute;top:12px;right:12px;
-  background:#fff;padding:6px 12px;border-radius:4px;font-weight:bold;
-}
+    .right{
+      flex:0 0 380px;
+      min-width:260px;
+      padding:18px;
+      border-radius:12px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
 
-/* Noor Glow */
-.noor-img{width:180px;margin:auto; display:block;}
-.noor-img.intro{animation:introGlow 1.5s ease forwards;}
-.noor-img.pulse{animation:pulseGlow 5s ease infinite;}
-@keyframes introGlow{0%{filter:brightness(1)}100%{filter:brightness(1.4)}}
-@keyframes pulseGlow{
- 0%{transform:scale(1);filter:brightness(1)}
- 50%{transform:scale(1.06);filter:brightness(1.25)}
-100%{transform:scale(1);filter:brightness(1)}
-}
+    .card{
+      width:100%;
+      border-radius:12px;
+      padding:22px;
+      background:linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
+      color:#fff;
+      text-align:center;
+      box-shadow:0 8px 30px rgba(0,0,0,0.35);
+    }
 
-footer{margin-top:28px;text-align:center;font-size:14px;opacity:.8;}
+    .small{font-size:13px; opacity:.9}
+    .muted{opacity:.85; font-size:14px}
 
-</style>
+    footer{
+      padding:18px 28px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
+      display:flex;
+      justify-content:center;
+      color:rgba(255,255,255,0.85);
+      font-size:13px;
+    }
+
+    /* modal for video */
+    .modal{
+      position:fixed;
+      inset:0;
+      display:none;
+      align-items:center;
+      justify-content:center;
+      background:rgba(2,6,23,0.6);
+      z-index:9999;
+      padding:28px;
+    }
+    .modal.open{display:flex}
+    .modal-inner{
+      width:100%;
+      max-width:900px;
+      background:#000;
+      border-radius:12px;
+      overflow:hidden;
+    }
+    .modal iframe{width:100%; height:56vw; max-height:560px; border:0; display:block}
+    .close-btn{
+      position:absolute;
+      top:20px;
+      right:20px;
+      background:rgba(255,255,255,0.08);
+      color:#fff;
+      border-radius:10px;
+      padding:8px 10px;
+      cursor:pointer;
+      font-weight:700;
+      border:0;
+    }
+
+    @media (max-width:720px){
+      .hero{padding:20px}
+      .right{order:-1}
+      h1{font-size:28px}
+    }
+
+    /* Noor Path glow */
+    .noor-wrap {
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:18px;
+    }
+    .noor-img {
+      width:320px;
+      max-width:40vw;
+      filter:drop-shadow(0 0 18px rgba(255,200,120,0.4));
+      transition:transform .4s ease;
+      border-radius:6px;
+      transform-origin:center;
+    }
+    .noor-img.intro {
+      animation:introGlow 5s ease forwards;
+    }
+    .noor-img.pulse {
+      animation:pulseGlow 6s ease-in-out infinite;
+    }
+    @keyframes introGlow {
+      0% { transform:scale(1); filter:brightness(1); opacity:.9;}
+      30%{ transform:scale(1.06); filter:brightness(1.25) drop-shadow(0 0 25px rgba(255,210,120,0.3));}
+      60%{ transform:scale(1.04); filter:brightness(1.12) drop-shadow(0 0 16px rgba(255,200,90,0.2));}
+      100%{ transform:scale(1); filter:brightness(1.05); opacity:1;}
+    }
+    @keyframes pulseGlow {
+      0%{ transform:scale(1); filter:brightness(1);}
+      50%{ transform:scale(1.02); filter:brightness(1.1) drop-shadow(0 0 12px rgba(255,210,120,0.15));}
+      100%{ transform:scale(1); filter:brightness(1);}
+    }
+  </style>
 </head>
 <body>
+  <div class="wrap" role="main">
+    <!-- Noor Path banner -->
+    <div class="noor-wrap" style="margin-bottom:16px;">
+      <img src="./20251013_081324.png" alt="The Noor Path" class="noor-img intro" />
+    </div>
 
-<div class="wrap">
+    <div class="hero">
+      <!-- Left: main text -->
+      <div class="left">
+        <div class="logo" aria-hidden="true">
+          <img src="./logo.png" alt="PiVoice logo" id="appLogo" />
+        </div>
 
-<!-- Noor Glowing Banner -->
-<img src="./20251013_081324.png" class="noor-img" alt="VoicePi Noor" />
+        <h1>Welcome to <strong>PiVoice</strong></h1>
+        <p class="lead">
+          A platform to share short 30-second motivational voice notes with the Pi Network community — record, share, and earn Pi.
+        </p>
 
-<div class="hero">
-<h1><strong>VoicePi</strong></h1>
-<p class="lead">A platform to share short motivational 30-second voice notes on the Pi Network 🚀</p>
-</div>
+        <div class="cta-row">
+          <!-- Watch demo (short) -->
+          <button class="btn btn--primary" id="openVideo">
+            ▶ Watch Demo (30s)
+          </button>
 
-<!-- CTA -->
-<div class="cta-row">
-<button class="btn btn--primary" id="openVideo">▶ Play Demo 30s</button>
-<button class="btn btn--ghost" id="openVideo2">▶ Watch Full Demo</button>
-</div>
+          <!-- Brainstorm link -->
+          <a class="btn btn--ghost"
+             href="https://brainstorm.pinet.com/project/68e0c81bafc9195a23180c5a"
+             target="_blank" rel="noopener">
+            💡 View Brainstorm
+          </a>
 
-<!-- NEW PI PAYMENT BUTTON 🔥 -->
-<div class="cta-row">
-<button id="payBtn" class="btn btn--primary">Pay 1π (Test)</button>
-</div>
+          <!-- Pi app / join -->
+          <a class="btn" style="background:#fff;color:#021024"
+             href="https://play.google.com/store" target="_blank" rel="noopener">
+            🌐 Join Pi Network
+          </a>
+        </div>
+      </div>
 
-<footer>©2025 — VoicePi | Built for Pi Hackathon 🔥</footer>
-</div>
+      <!-- Right: demo card -->
+      <div class="right">
+        <div class="card">
+          <h3 style="margin:0 0 8px;">PiVoice Demo</h3>
+          <p class="muted">Quick preview — click Play Demo to open the full demo modal.</p>
+          <div style="height:12px;"></div>
+          <div style="display:flex; gap:8px; justify-content:center;">
+            <!-- Play full demo -->
+            <button class="btn btn--primary" id="openVideo2">▶ Play Demo</button>
+          </div>
+          <div style="height:14px;"></div>
+          <div class="small muted">Built for Pi Hackathon 2025 · Short demo available on YouTube</div>
+        </div>
+      </div>
+    </div>
 
+    <footer>
+      © 2025 PiVoice · Built for Pi Hackathon.
+    </footer>
+  </div>
 
-<!-- Modal -->
-<div class="modal" id="modal">
- <button class="close-btn" id="closeModal">X</button>
- <iframe id="ytFrame" src=""></iframe>
-</div>
+  <!-- Modal for YouTube -->
+  <div id="modal" class="modal" aria-hidden="true">
+    <button class="close-btn" id="closeModal" aria-label="Close">✕</button>
+    <div class="modal-inner">
+      <iframe id="ytFrame" src="" title="PiVoice Demo"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen></iframe>
+    </div>
+  </div>
 
-<script>
-// ------------------ YouTube Modal Logic ---------------------
+  <script>
+  (function(){
+    // YouTube IDs
+    const SHORT_YT_ID = "dKlww-WgriA";   // 30s demo
+    const FULL_YT_ID  = "IYLyJPFY1Ao";   // 3-min demo
 
-const SHORT = "dKhww-WgrjA";  // 30 sec demo
-const FULL  = "IYLyJPfYI0A"; // 3 min version
+    const modal     = document.getElementById('modal');
+    const yt        = document.getElementById('ytFrame');
+    const openShort = document.getElementById('openVideo');
+    const openFull  = document.getElementById('openVideo2');
+    const closeBtn  = document.getElementById('closeModal');
 
-const modal = document.getElementById('modal');
-const ytf   = document.getElementById('ytFrame');
+    function openModalWith(id){
+      if(!modal || !yt) return;
+      yt.src = "https://www.youtube.com/embed/" + id + "?autoplay=1&rel=0&modestbranding=1";
+      modal.style.display = 'flex';
+      modal.classList.add('open');
+      modal.setAttribute('aria-hidden','false');
+    }
+    function closeModal(){
+      if(!modal || !yt) return;
+      yt.src = "";
+      modal.classList.remove('open');
+      modal.style.display = 'none';
+      modal.setAttribute('aria-hidden','true');
+    }
 
-document.getElementById("openVideo") ?.addEventListener("click", ()=>open(SHORT));
-document.getElementById("openVideo2")?.addEventListener("click", ()=>open(FULL));
-document.getElementById("closeModal") ?.addEventListener("click",close);
+    if(openShort) openShort.addEventListener('click', () => openModalWith(SHORT_YT_ID));
+    if(openFull)  openFull.addEventListener('click', () => openModalWith(FULL_YT_ID));
+    if(closeBtn)  closeBtn.addEventListener('click', closeModal);
+    if(modal){
+      modal.addEventListener('click', e => { if(e.target === modal) closeModal(); });
+    }
+    document.addEventListener('keydown', e => { if(e.key === 'Escape') closeModal(); });
 
-function open(id){
- modal.classList.add("open");
- ytf.src=`https://www.youtube.com/embed/${id}?autoplay=1`;
-}
-function close(){
- modal.classList.remove("open");
- ytf.src="";
-}
-
-// Noor Glow active
-setTimeout(()=> document.querySelector(".noor-img").classList.add("pulse"),2500);
-
-
-// ------------------ Pi Payment Integration 🔥 ---------------------
-
-(function(){
- const btn=document.getElementById('payBtn');
- if(!btn) return;
-
- async function pay(){
-   if(!window.Pi){
-     alert("Open inside Pi Browser to make payment");
-     return;
-   }
-
-   try{
-     const tx = await Pi.createPayment({
-       amount:1,
-       memo:"VoicePi Test Payment",
-       metadata:{app:"VoicePi",developer:"Sajid"}
-     });
-
-     alert("Payment Sent — approve in popup ✔");
-     console.log(tx);
-
-   }catch(e){
-     alert("Payment Failed: "+e.message);
-     console.error(e);
-   }
- }
- btn.addEventListener("click",pay);
-})();
-</script>
-
+    // Noor glow: intro -> pulse
+    const img = document.querySelector('.noor-img');
+    if(img){
+      img.classList.add('intro');
+      setTimeout(() => {
+        img.classList.remove('intro');
+        img.classList.add('pulse');
+      }, 5000);
+    }
+  })();
+  </script>
 </body>
 </html>
